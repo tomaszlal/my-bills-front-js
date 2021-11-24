@@ -75,6 +75,18 @@ function validateCategoryField() {
     validateFormFields();
 }
 
+//sprawdzenie wpisania do pola formularz nr faktry minimum 5 znaków
+function validateInvoiceField() {
+    let invoiceField = document.getElementById("invoiceNumber").value;
+    if (invoiceField.length > 5) {
+        isCorrectlyFieldInvoiceNumer = true;
+    } else {
+        isCorrectlyFieldInvoiceNumer = false;
+    }
+    console.log(isCorrectlyFieldInvoiceNumer);
+    validateFormFields();
+}
+
 // włączenie przycisku dodaj rachunek
 function enableButAddBill(enable) {
     document.getElementById("buttonAddBill").disabled = !enable;
