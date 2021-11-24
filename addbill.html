@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje rachunki</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="container-fluid">
+
+            <div class="nav-toggle p-3 text-primary fw-bold justify-content-start h3">
+                Moje rachunki
+            </div>
+
+            <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
+                data-bs-target="#nav-menu" aria-controls="nav-menu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <img src="icons/burger_icon.svg">
+            </button>
+            <div class="collapse navbar-collapse p-3 justify-content-end " id="nav-menu" role="navigation">
+                <ul class="nav " role="menu">
+                    <li class="nav-item active">
+                        <a href="index.html" class="nav-link">Lista rachunków</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="addbill.html" class="nav-link">Dodaj rachunek</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="addcategory.html" class="nav-link">Dodaj kategorię</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+        </div>
+    </nav>
+    <div class="container py-3">
+        <div class="h4 text-muted">Dodaj rachunek</div>
+        <div class="row g-2">
+            <div class="col-md-4">
+                <label for="selectCategory" class="form-label">Kategoria</label>
+                <select class="form-select" aria-label="Default select example" id="selectCategory"
+                    data-toggle="tooltip" title="Wybierz kategorię" onchange="">
+                    <option value="0">Wybierz ...</option>
+                </select>
+            </div>
+            <div class="col-md-8">
+                <label class="form-label">Numer faktury/tytuł zapłaty</label>
+                <input type="text" class="form-control" id="invoiceNumber">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Kwota do zapłaty</label>
+                <input type="text" class="form-control text-end" id="amount" oninput="validateAmountField()">
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Data wystawienia</label>
+                <input type="date" class="form-control" id="dateOfIssue">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Termin płatności</label>
+                <input type="date" class="form-control" id="dateOfPayment">
+            </div>
+
+
+
+            <div class="col-12">
+                <button class="btn btn-primary" id="buttonAddBill" disabled onclick="">Dodaj rachunek</button>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Modal deleting category-->
+    <div class="modal fade" id="delCatModal" tabindex="-1" aria-labelledby="delCatModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delCatModalLabel">USUŃ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                        onclick="delCategoryFromDb()">Usuń</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jsAddBill.js"></script>
+</body>
+
+</html>
