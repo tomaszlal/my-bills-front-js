@@ -41,6 +41,8 @@ function insertCategoryToSelect(element, select, nrSelect, selected) {
 let isCorrectlyFieldAmount = false;
 let isCorrectlyFieldCategory = false;
 let isCorrectlyFieldInvoiceNumer = false;
+let isCorrectlyFieldDateOfIssue = false;
+let isCorrectlyFieldDateOfPayment = false;
 
 // sprawdzenie i wprowadzenie kwoty w okienko
 let amountOk = "";
@@ -60,6 +62,11 @@ function validateAmountField() {
     validateFormFields()
 }
 
+//sprawdzenie wybrania kategorii
+function validateCategoryField() {
+    
+}
+
 // włączenie przycisku dodaj rachunek
 function enableButAddBill(enable) {
     document.getElementById("buttonAddBill").disabled = !enable;
@@ -67,7 +74,7 @@ function enableButAddBill(enable) {
 
 //funkcja sprawdza czy wszystkie pola formularza poprawnie wypełnione i włącza lub wyłącza button
 function validateFormFields() {
-    if (isCorrectlyFieldAmount && isCorrectlyFieldCategory && isCorrectlyFieldInvoiceNumer) {
+    if (isCorrectlyFieldAmount && isCorrectlyFieldCategory && isCorrectlyFieldInvoiceNumer && isCorrectlyFieldDateOfIssue && isCorrectlyFieldDateOfPayment) {
         enableButAddBill(true);
     } else {
         enableButAddBill(false);
