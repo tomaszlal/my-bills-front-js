@@ -47,8 +47,8 @@ let isCorrectlyFieldDateOfPayment = false;
 // sprawdzenie i wprowadzenie kwoty w okienko
 let amountOk = "";
 function validateAmountField() {
-    let fiieldAmount = document.getElementById("amount");
-    let amount = fiieldAmount.value;
+    let fieldAmount = document.getElementById("amount");
+    let amount = fieldAmount.value;
     amount = amount.replace(/,/g, '.');
     amount = amount.replace(/[^0-9\\.]+/g, '');
     // amount = amount.replace(/\D+/g, "");  
@@ -58,13 +58,21 @@ function validateAmountField() {
         isCorrectlyFieldAmount = true;
         amountOk =  amount;
     }
-    fiieldAmount.value = amountOk;
+    fieldAmount.value = amountOk;
     validateFormFields()
 }
 
 //sprawdzenie wybrania kategorii
 function validateCategoryField() {
-    
+    let fieldCategory = document.getElementById("selectCategory");
+    console.log(fieldCategory.value);
+    if (fieldCategory.value > 0){
+        isCorrectlyFieldCategory = true;       
+    }else{
+        isCorrectlyFieldCategory = false;
+    }
+    console.log(isCorrectlyFieldCategory);
+    validateFormFields();
 }
 
 // włączenie przycisku dodaj rachunek
