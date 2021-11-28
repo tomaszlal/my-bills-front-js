@@ -56,7 +56,7 @@ function validateAmountField() {
     console.log(tableOfAmount);
     if (tableOfAmount.length == 1 || (tableOfAmount.length == 2 && tableOfAmount[1].length < 3)) {
         isCorrectlyFieldAmount = true;
-        amountOk =  amount;
+        amountOk = amount;
     }
     fieldAmount.value = amountOk;
     validateFormFields()
@@ -66,9 +66,9 @@ function validateAmountField() {
 function validateCategoryField() {
     let fieldCategory = document.getElementById("selectCategory");
     console.log(fieldCategory.value);
-    if (fieldCategory.value > 0){
-        isCorrectlyFieldCategory = true;       
-    }else{
+    if (fieldCategory.value > 0) {
+        isCorrectlyFieldCategory = true;
+    } else {
         isCorrectlyFieldCategory = false;
     }
     console.log(isCorrectlyFieldCategory);
@@ -87,6 +87,37 @@ function validateInvoiceField() {
     validateFormFields();
 }
 
+//sprawdzenie wprowadzenia daty wystawienia rachynku
+function validateDateOfIssueField() {
+    let dateOfIssueField = document.getElementById("dateOfIssue").value;
+    console.log(dateOfIssueField);
+    let year = dateOfIssueField.split("-")[0];
+    if (year > 2000) {
+        isCorrectlyFieldDateOfIssue = true;
+    } else {
+        isCorrectlyFieldDateOfIssue = false;
+    }
+
+    //validateFormFields();
+    validateDateOfPaymentField();
+}
+
+//sprawdzenie wprowadzenia daty terminu płatności zapłaty za rachunek
+function validateDateOfPaymentField() {
+    let dateOfIssueField = document.getElementById("dateOfIssue").value;
+    let dateOfPaymentField = document.getElementById("dateOfPayment").value;
+
+
+    let year = dateOfPaymentField.split("-")[0];
+    if (year > 2000 && dateOfPaymentField > dateOfIssueField) {
+        isCorrectlyFieldDateOfPayment = true;
+        console.log("data wieksza")
+    } else {
+        isCorrectlyFieldDateOfPayment = false;
+    }
+    validateFormFields();
+}
+
 // włączenie przycisku dodaj rachunek
 function enableButAddBill(enable) {
     document.getElementById("buttonAddBill").disabled = !enable;
@@ -99,4 +130,33 @@ function validateFormFields() {
     } else {
         enableButAddBill(false);
     }
+}
+
+
+//funkcja wysylajaca do API rachunek 
+async function saveBillInDb() {
+    let select = document.getElementById("selectCategory");
+    let billToInsert = {
+        "id": null,
+        "category":{
+            "id": select.value
+        },
+        "invoiceNumber":document.getElementById("invoiceNumber").value,
+        "amount":document.getElementById("amount").value,
+        "dateOfIssue":document.getElementById("dateOfIssue").value,
+        "dueDate":null,
+        "dateOfPayment":document.getElementById("dateOfPayment").value,
+        "wasPaid":false
+    }
+    await fetch(apiUrl+'/bills', {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json;charset=UTF-8"
+        },
+        body: JSON.stringify(billToInsert)
+    }).then(res => res.json().then(data => {
+        console.log(data);
+        location.replace("index.html");
+
+    }));
 }

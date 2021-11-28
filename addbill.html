@@ -64,17 +64,17 @@
 
             <div class="col-md-4">
                 <label for="validationCustomUsername" class="form-label">Data wystawienia</label>
-                <input type="date" class="form-control" id="dateOfIssue">
+                <input type="date" class="form-control" id="dateOfIssue" oninput="validateDateOfIssueField()">
             </div>
             <div class="col-md-4">
                 <label for="validationCustomUsername" class="form-label">Termin płatności</label>
-                <input type="date" class="form-control" id="dateOfPayment">
+                <input type="date" class="form-control" id="dateOfPayment" oninput="validateDateOfPaymentField()">
             </div>
 
 
 
             <div class="col-12">
-                <button class="btn btn-primary" id="buttonAddBill" disabled onclick="">Dodaj rachunek</button>
+                <button class="btn btn-primary" id="buttonAddBill" disabled onclick="saveBillInDb()">Dodaj rachunek</button>
             </div>
 
 
