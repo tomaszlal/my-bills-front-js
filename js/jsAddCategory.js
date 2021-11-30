@@ -57,7 +57,7 @@ function insertCategoryToTab(element, tbody) {
     });
     let td = document.createElement("td");
     imgTrash = document.createElement("img");
-    imgTrash.setAttribute("src", "icons/trash-2.svg");
+    imgTrash.setAttribute("src", "icons_web/trash-2.svg");
     imgTrash.setAttribute("id", element.id);
     imgTrash.setAttribute("data-bs-toggle", "modal");
     imgTrash.setAttribute("data-bs-target", "#delCatModal");

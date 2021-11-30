@@ -1,4 +1,4 @@
-const apiUrl = "http://"+location.hostname+":8080";
+const apiUrl = "http://" + location.hostname + ":8080";
 
 document.addEventListener("load", startWeb());
 
@@ -13,13 +13,13 @@ let tableBills = new Array();
 function startWeb() {
     getCategoryToSelect();
     getBills();
-    
+
 }
 
 //funkcja pobiera categotie wydatków i umiescza w select
 async function getCategoryToSelect() {
     let obj;
-    await fetch(apiUrl+'/category')
+    await fetch(apiUrl + '/category')
         .then(res => res.json())
         .then(data => obj = data);
     // console.log(obj.length);
@@ -46,7 +46,7 @@ function insertCategoryToSelect(element, select, nrSelect, selected) {
 //funkcja pobiera categotie wydatków i umiescza w tabeli
 async function getBills() {
     let obj;
-    await fetch(apiUrl+'/bill')
+    await fetch(apiUrl + '/bill')
         .then(res => res.json())
         .then(data => obj = data);
     // console.log(obj.length);
@@ -104,7 +104,7 @@ function insertBillToTab(element, tbody) {
 
     //wstawienie ikony kosza
     let imgTrash = document.createElement("img");
-    imgTrash.setAttribute("src", "icons/trash-2.svg");
+    imgTrash.setAttribute("src", "icons_web/trash-2.svg");
     imgTrash.className = "m-1";
     imgTrash.setAttribute("data-bs-toggle", "modal");
     imgTrash.setAttribute("data-bs-target", "#delBillModal");
@@ -116,7 +116,7 @@ function insertBillToTab(element, tbody) {
 
     //wstawienie ikony oko
     let imgShow = document.createElement("img");
-    imgShow.setAttribute("src", "icons/eye.svg");
+    imgShow.setAttribute("src", "icons_web/eye.svg");
     imgShow.className = "m-1";
     imgShow.setAttribute("data-bs-toggle", "modal");
     imgShow.setAttribute("data-bs-target", "#showBillModal");
@@ -129,7 +129,7 @@ function insertBillToTab(element, tbody) {
 
     //wstawienie ikony edycja
     let imgEdit = document.createElement("img");
-    imgEdit.setAttribute("src", "icons/edit-2.svg");
+    imgEdit.setAttribute("src", "icons_web/edit-2.svg");
     imgEdit.className = "m-1";
     imgEdit.setAttribute("data-bs-toggle", "modal");
     imgEdit.setAttribute("data-bs-target", "#editBillModal");
@@ -142,7 +142,7 @@ function insertBillToTab(element, tbody) {
     //wstawienie ikony dolara - zapłać
     if (!element.wasPaid) {
         let imgPay = document.createElement("img");
-        imgPay.setAttribute("src", "icons/dollar-sign.svg");
+        imgPay.setAttribute("src", 'icons_web/dollar-sign.svg');
         imgPay.className = "m-1";
         imgPay.setAttribute("data-bs-toggle", "modal");
         imgPay.setAttribute("data-bs-target", "#payBillModal");
@@ -191,7 +191,7 @@ function idBillToShow(object) {
 
 //pobieranie rachunku po id do usunięcia
 async function getBillByIdToDelete(id) {
-    url = apiUrl+'/bill/' + id;
+    url = apiUrl + '/bill/' + id;
     await fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -208,7 +208,7 @@ async function getBillByIdToDelete(id) {
 //funkcja usuwająca rachunek z bazy danej
 async function delBillFromDb() {
     let id = idBillContext;
-    await fetch(apiUrl+'/bill/' + id, {
+    await fetch(apiUrl + '/bill/' + id, {
         method: "DELETE"
     }).then(location.reload());
 }
@@ -218,7 +218,7 @@ async function delBillFromDb() {
 
 //pobieranie rachunku po id do podglądu
 async function getBillByIdToShow(id) {
-    url = apiUrl+'/bill/' + id;
+    url = apiUrl + '/bill/' + id;
     await fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -242,7 +242,7 @@ let billToUpdate;
 
 //pobieranie rachunku po id do podglądu i zapisanie jej w zmiennej billToUpdate
 function getBillByIdToUpdate(id) {
-    url = apiUrl+'/bill/' + id;
+    url = apiUrl + '/bill/' + id;
     fetch(url)
         .then(res => res.json()
             .then(data => {
@@ -263,7 +263,7 @@ function getBillByIdToUpdate(id) {
 async function getBillByIdToEdit(id) {
 
     //fetch do kategorii
-    url = apiUrl+'/bill/' + id;
+    url = apiUrl + '/bill/' + id;
     await fetch(url)
         .then(res => res.json()
             .then(data => {
@@ -280,7 +280,7 @@ async function getBillByIdToEdit(id) {
 
             }));
     let obj;
-    await fetch(apiUrl+'/category')
+    await fetch(apiUrl + '/category')
         .then(res => res.json())
         .then(data => obj = data);
     clearOptionsFast("editSelectCategory");
@@ -294,7 +294,7 @@ async function getBillByIdToEdit(id) {
         }
 
     });
-    
+
 }
 
 //funkcja czyszcząca date w edycji rachunku wywoływana przy onchange w polu chcked
@@ -306,7 +306,7 @@ function changePayStatus() {
         fieldDateDue.value = "";
         fieldWasPaid.disabled = true;
         fieldDateDue.disabled = true;
-    } else{
+    } else {
         fieldWasPaid.disabled = false;
         fieldDateDue.disabled = false;
     }
@@ -342,7 +342,7 @@ async function updateBillInDb() {
     billToUpdate.dueDate = dateDue;
     billToUpdate.wasPaid = true;
     console.log(billToUpdate);
-    await fetch(apiUrl+'/bills', {
+    await fetch(apiUrl + '/bills', {
         method: "PUT",
         headers: {
             'Content-Type': "application/json;charset=UTF-8"
@@ -365,7 +365,7 @@ async function updateBillInDbAfterEdit() {
     billToUpdate.dateOfPayment = document.getElementById("dateOfPaymentFieldEdit").value;
     billToUpdate.dueDate = document.getElementById("dateDueFieldEdit").value;
     billToUpdate.wasPaid = document.getElementById("checkWasPaid").checked;
-    await fetch(apiUrl+'/bills', {
+    await fetch(apiUrl + '/bills', {
         method: "PUT",
         headers: {
             'Content-Type': "application/json;charset=UTF-8"
